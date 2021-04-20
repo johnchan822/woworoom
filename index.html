@@ -286,30 +286,54 @@
   </section>
   <section class="wrap productDisplay">
     <select name="" class="productSelect">
-      <option value="全部" selected>全部</option>
+      <!-- <option value="全部" selected>全部</option>
       <option value="床架">床架</option>
       <option value="收納">收納</option>
-      <option value="窗簾">窗簾</option>
+      <option value="窗簾">窗簾</option> -->
     </select>
     <ul class="productWrap">
-      <img src="" alt="">
+      <!-- <li class="productCard">
+        <h4 class="productType">新品</h4>
+        <img
+          src="https://hexschool-api.s3.us-west-2.amazonaws.com/custom/dp6gW6u5hkUxxCuNi8RjbfgufygamNzdVHWb15lHZTxqZQs0gdDunQBS7F6M3MdegcQmKfLLoxHGgV3kYunUF37DNn6coPH6NqzZwRfhbsmEblpJQLqXLg4yCqUwP3IE.png"
+          alt="">
+        <a href="#" id="addCardBtn">加入購物車</a>
+        <h3>Antony 雙人床架／雙人加大</h3>
+        <del class="originPrice">NT$18,000</del>
+        <p class="nowPrice">NT$12,000</p>
+      </li> -->
     </ul>
   </section>
   <section class="shoppingCart">
     <h3 class="section-title">我的購物車</h3>
     <div class="overflowWrap">
       <table class="shoppingCart-table">
-        <thead>
-          <tr>
-            <th width="40%">品項</th>
-            <th width="15%">單價</th>
-            <th width="15%">數量</th>
-            <th width="15%">金額</th>
-            <th width="15%"></th>
-          </tr>
-        </thead>
-        <tbody class="tbody">
-          </tbody>
+        <tr>
+          <th width="40%">品項</th>
+          <th width="15%">單價</th>
+          <th width="15%">數量</th>
+          <th width="15%">金額</th>
+          <th width="15%"></th>
+        </tr>
+        <tbody class='table'>
+        <!-- <tr>
+          <td>
+            <div class="cardItem-title">
+              <img src="https://i.imgur.com/HvT3zlU.png" alt="">
+              <p>Antony 雙人床架／雙人加大</p>
+            </div>
+          </td>
+          <td>NT$12,000</td>
+          <td>1</td>
+          <td>NT$12,000</td>
+          <td class="discardBtn">
+            <a href="#" class="material-icons">
+              clear
+            </a>
+          </td>
+        </tr> -->
+    </tbody>
+        <tr>
           <td>
             <a href="#" class="discardAllBtn">刪除所有品項</a>
           </td>
@@ -318,9 +342,8 @@
           <td>
             <p>總金額</p>
           </td>
-          <td class="totalPrice"></td>
+          <td class='totalPrice'></td>
         </tr>
-      
       </table>
     </div>
   </section>
@@ -368,6 +391,7 @@
       <input type="submit" value="送出預訂資料" class="orderInfo-btn">
     </form>
   </section>
+</body>
   </body>
   <script src="./js/index-animation.js"></script>
   <script src="./js/config.js"></script>
