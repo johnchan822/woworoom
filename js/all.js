@@ -26,10 +26,10 @@ function printList(allData) {
           <h4 class="productType">新品</h4>
           <img src="${item.images}"
             alt="">
-          <a href="#" id="addCardBtn" data-id=${item.id} data->加入購物車</a>
+          <a href="#" id="addCardBtn" data-id=${item.id} data-title=${item.title.replace(/\s+/g, '')}>加入購物車</a>
           <h3>${item.title}</h3>
-          <del class="originPrice">${item.origin_price}</del>
-          <p class="nowPrice">${item.price}</p>
+          <del class="originPrice">${toThousands(item.origin_price)}</del>
+          <p class="nowPrice">${toThousands(item.price)}</p>
         </li>`
   })
   document.querySelector('.productWrap').innerHTML = str;
@@ -56,14 +56,14 @@ function printCartList() {
               <p>${item.product.title}</p>
             </div>
           </td>
-          <td>${item.product.price}</td>
+          <td>${toThousands(item.product.price)}</td>
 
           <td class="quantityEdit">
           <button class="lessBtn" data-num=${item.quantity - 1} data-id=${item.id}>-</button>
           ${item.quantity}
           <button class="plusBtn" data-num=${item.quantity + 1} data-id=${item.id}>+</button>
           </td>
-          <td>${item.product.price * item.quantity}</td>
+          <td>${toThousands(item.product.price * item.quantity)}</td>
           <td class="discardBtn">
             <a href="#" class="material-icons " id="delBtn" data-id=${item.id} >
               clear
@@ -71,7 +71,7 @@ function printCartList() {
           </td>
         </tr>`
   })
-  document.querySelector('.totalPrice').textContent = total;
+  document.querySelector('.totalPrice').textContent = toThousands(total);
   document.querySelector('.table').innerHTML = str;
 }
 function printSelectFilter() {
@@ -94,7 +94,6 @@ function printSelectFilter() {
   document.querySelector('.productSelect').innerHTML = firstStr + str;
 
 }
-
 function dellCartAllProduct(e){
   e.preventDefault();
   axios.delete(userUrl+`carts`)
@@ -120,8 +119,8 @@ function selectProduct(e) {
   })
   printList(filterData)
 }
-
 function addProduct(e){
+  let selectTitle = e.target.dataset.title;
   e.preventDefault();
   if (e.target.getAttribute('id') !=='addCardBtn'){
     return ;
@@ -139,11 +138,10 @@ function addProduct(e){
       "productId": productId,
       "quantity": numCheck
     }}).then(function() {
+      alert(`${selectTitle}已加入到購物車`)
       init();
-      alert('已加入到購物車')
     })
 }
-
 function Product(e) {
   e.preventDefault();
   let productId = e.target.dataset.id;
@@ -156,6 +154,7 @@ function Product(e) {
       alert('購物車商品不能小於0')
       return
     }
+    alert(`數量為${num}`)
     editProduct(productId, num);
   }
 }
@@ -186,7 +185,6 @@ function editProduct(productId,num){
     alert('錯誤')
   })
 }
-
 
 const inputs = document.querySelectorAll("input[name],select[data=payment]");
 const form = document.querySelector(".orderInfo-form");
@@ -226,7 +224,6 @@ const constraints = {
 };
 
 //認證
-
 inputs.forEach((item) => {
   item.addEventListener("change", function () {
     let errors = validate(form, constraints);
@@ -283,8 +280,13 @@ e.preventDefault();
   }).catch(function(response){
     // console.log(response)
   })
+}
 
-
+// util js、元件
+function toThousands(x) {
+  let parts = x.toString().split(".");
+  parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  return parts.join(".");
 }
 
 document.querySelector('.table').addEventListener('click',Product)
